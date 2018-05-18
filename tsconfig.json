@@ -1,0 +1,24 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "baseUrl": "./",
+        "sourceMap": true,
+        "sourceRoot": "./",
+        "noImplicitAny": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "outDir": "./lib",
+        "declaration": true
+    },
+
+    "include": [
+        "src/*.ts",
+        "test/*.ts"
+    ],
+
+    "exclude": [
+        "node_modules"
+    ]
+}

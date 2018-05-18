@@ -1,0 +1,17 @@
+{
+    "defaultSeverity": "error",
+    "extends": ["tslint-config-airbnb", "tslint-config-prettier"],
+    "jsRules": {},
+    "rules": {
+        "import-name": false,
+        "new-parens": true,
+        "no-arg": true,
+        "no-bitwise": true,
+        "no-conditional-assignment": true,
+        "no-consecutive-blank-lines": false,
+        "no-console": {
+            "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+        }
+    },
+    "rulesDirectory": []
+}

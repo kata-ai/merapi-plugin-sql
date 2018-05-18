@@ -1,0 +1,22 @@
+{
+  "name": "merapi-plugin-sql",
+  "version": "0.1.0",
+  "description": "Merapi plugin for SQL connection using knex",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ricky Anders <rickyanders93@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "knex": "^0.14.6",
+    "merapi": "^0.19.3",
+    "mysql": "^2.15.0",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/knex": "^0.14.14",
+    "@types/uuid": "^3.4.3",
+    "typescript": "^2.8.3"
+  }
+}

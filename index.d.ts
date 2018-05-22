@@ -5,6 +5,9 @@ import { Component } from "merapi";
 import * as Knex from "knex";
 
 export class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T> {
+    protected tableName: string;
+    protected knex: Knex;
+
     constructor (
         tableName: string,
         knex: Knex

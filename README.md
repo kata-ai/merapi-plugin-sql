@@ -9,7 +9,7 @@
 ## Installation
 
 ```
-npm install merapi-plugin-knex --save
+npm install merapi-plugin-sql --save
 ```
 
 ## Configuration

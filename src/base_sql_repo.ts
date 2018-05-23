@@ -14,7 +14,6 @@ export default class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T>
         protected readonly knex: Knex,
     ) {
         super();
-        this.tableName = tableName;
         this.table = () => this.knex(this.tableName);
     }
 
@@ -44,7 +43,7 @@ export default class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T>
         }
     }
 
-    public async getMany(query: Partial<T>, page?: number, limit: number = 10): Promise<IPaginated<Id<T>>> {
+    public async getMany(query: Partial<T>, page: number = 1, limit: number = 10): Promise<IPaginated<Id<T>>> {
         try {
             let dataPromise;
 
@@ -61,6 +60,31 @@ export default class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T>
             }
 
             const totalPromise = this.count(query);
+            const [data, total] = await Promise.all([dataPromise, totalPromise]);
+
+            return { data, limit, page, total };    
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    public async getManyByIds(ids: string[], page: number = 1, limit: number = 10): Promise<IPaginated<Id<T>>> {
+        try {
+            let dataPromise;
+
+            if (page) {
+                const pg = page > 0 ? page : 1;
+                const lmt = limit ? limit : 10;
+                dataPromise = this.knex(this.tableName).whereIn("id", ids).offset((pg - 1) * lmt).limit(lmt);
+            } else if (limit) {
+                dataPromise = this.knex(this.tableName).whereIn("id", ids).limit(limit);
+                page = 1;
+            } else {
+                dataPromise = this.knex(this.tableName).whereIn("id", ids);
+                page = 1;
+            }
+
+            const totalPromise = this.knex(this.tableName).whereIn("id", ids).count();
             const [data, total] = await Promise.all([dataPromise, totalPromise]);
 
             return { data, limit, page, total };    

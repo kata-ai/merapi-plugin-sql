@@ -11,6 +11,7 @@ export default class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T>
     getById(id: string): Promise<Id<T>>;
     getOne(query: Partial<T>): Promise<Id<T>>;
     getMany(query: Partial<T>, page?: number, limit?: number): Promise<IPaginated<Id<T>>>;
+    getManyByIds(ids: string[], page?: number, limit?: number): Promise<IPaginated<Id<T>>>;
     getLike(column: string, queryString: string): Promise<Id<T>>;
     insertOne(object: T): Promise<Id<T>>;
     insertMany(objects: T[]): Promise<T[]>;

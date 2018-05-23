@@ -1,6 +1,6 @@
 {
   "name": "merapi-plugin-sql",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Merapi plugin for SQL connection using knex",
   "main": "index.js",
   "scripts": {

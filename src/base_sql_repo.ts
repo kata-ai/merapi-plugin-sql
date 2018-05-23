@@ -21,7 +21,7 @@ export default class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T>
         try {
             const result = await this.table().where(query).count("*");
 
-            return result[0]["count(*)"];    
+            return result[0]["count(*)"];
         } catch (error) {
             throw error;
         }
@@ -50,12 +50,12 @@ export default class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T>
             if (page) {
                 const pg = page > 0 ? page : 1;
                 const lmt = limit ? limit : 10;
-                dataPromise = this.knex(this.tableName).where(query).offset((pg - 1) * lmt).limit(lmt);
+                dataPromise = this.table().where(query).offset((pg - 1) * lmt).limit(lmt);
             } else if (limit) {
-                dataPromise = this.knex(this.tableName).where(query).limit(limit);
+                dataPromise = this.table().where(query).limit(limit);
                 page = 1;
             } else {
-                dataPromise = this.knex(this.tableName).where(query);
+                dataPromise = this.table().where(query);
                 page = 1;
             }
 
@@ -75,19 +75,20 @@ export default class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T>
             if (page) {
                 const pg = page > 0 ? page : 1;
                 const lmt = limit ? limit : 10;
-                dataPromise = this.knex(this.tableName).whereIn("id", ids).offset((pg - 1) * lmt).limit(lmt);
+                dataPromise = this.table().whereIn("id", ids).offset((pg - 1) * lmt).limit(lmt);
             } else if (limit) {
-                dataPromise = this.knex(this.tableName).whereIn("id", ids).limit(limit);
+                dataPromise = this.table().whereIn("id", ids).limit(limit);
                 page = 1;
             } else {
-                dataPromise = this.knex(this.tableName).whereIn("id", ids);
+                dataPromise = this.table().whereIn("id", ids);
                 page = 1;
             }
 
-            const totalPromise = this.knex(this.tableName).whereIn("id", ids).count();
+            const totalPromise = await this.table().whereIn("id", ids).count("*");
+
             const [data, total] = await Promise.all([dataPromise, totalPromise]);
 
-            return { data, limit, page, total };    
+            return { data, limit, page, total: total[0]["count(*)"] };
         } catch (error) {
             throw error;
         }
@@ -95,7 +96,7 @@ export default class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T>
 
     public async getLike(column: string, queryString: string): Promise<Id<T>> {
         try {
-            const result = await this.knex(this.tableName).where(column, "like", `%${queryString}%`).first();
+            const result = await this.table().where(column, "like", `%${queryString}%`).first();
 
             return result;
         } catch (error) {

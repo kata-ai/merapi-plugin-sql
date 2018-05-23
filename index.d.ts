@@ -5,8 +5,8 @@ import { Component } from "merapi";
 import * as Knex from "knex";
 
 export class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T> {
-    protected tableName: string;
-    protected knex: Knex;
+    protected readonly tableName: string;
+    protected readonly table: () => Knex.QueryBuilder;
 
     constructor (
         tableName: string,
@@ -17,6 +17,7 @@ export class BaseSqlRepo<T> extends Component implements IBaseSqlRepo<T> {
     getById(id: string): Promise<Id<T>>;
     getOne(query: Partial<T>): Promise<Id<T>>;
     getMany(query: Partial<T>, page?: number, limit?: number): Promise<IPaginated<Id<T>>>;
+    getManyByIds(ids: string[], page?: number, limit?: number): Promise<IPaginated<Id<T>>>;
     getLike(column: string, queryString: string): Promise<Id<T>>;
     insertOne(object: T): Promise<Id<T>>;
     insertMany(objects: T[]): Promise<T[]>;

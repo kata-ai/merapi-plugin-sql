@@ -14,7 +14,7 @@ npm install merapi-plugin-sql --save
 
 ## Configuration
 
-Put knex configuration in config `storages.sql`:
+Put knex configuration in config `stores.sql`:
 ```json
 {
     "name": "merapi",
@@ -22,7 +22,7 @@ Put knex configuration in config `storages.sql`:
     "plugins": [
         "sql"
     ],
-    "storages": {
+    "stores": {
         "sql": {
             "client": "mysql",
             "connection": {

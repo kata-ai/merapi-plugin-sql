@@ -16,10 +16,10 @@ Object.keys(process.env).forEach(key => {
 });
 config.resolve();
 
-let dbConf = config.default("storages.sql", {});
+let dbConf = config.default("stores.sql", {});
 if (dbConf.pool) {
-    dbConf.pool.min = parseInt(config.default("storages.sql.pool.min", "2"));
-    dbConf.pool.max = parseInt(config.default("storages.sql.pool.max", "10"));
+    dbConf.pool.min = parseInt(config.default("stores.sql.pool.min", "2"));
+    dbConf.pool.max = parseInt(config.default("stores.sql.pool.max", "10"));
 }
 
 module.exports = dbConf;

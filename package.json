@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "knex": "^0.14.6",
-    "merapi": "^0.19.3",
+    "merapi": "^0.21.0",
     "mysql": "^2.15.0",
     "uuid": "^3.2.1"
   },

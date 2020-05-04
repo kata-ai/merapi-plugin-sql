@@ -9,7 +9,7 @@
   "author": "Ricky Anders <rickyanders93@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "knex": "^0.14.6",
+    "knex": "^0.19.5",
     "merapi": "^0.21.0",
     "mysql": "^2.15.0",
     "uuid": "^3.2.1"
